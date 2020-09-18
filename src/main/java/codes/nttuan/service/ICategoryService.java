@@ -1,4 +1,12 @@
 package codes.nttuan.service;
 
+import codes.nttuan.models.CategoryModel;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
 public interface ICategoryService {
+    List<CategoryModel> findAll();
+
 }

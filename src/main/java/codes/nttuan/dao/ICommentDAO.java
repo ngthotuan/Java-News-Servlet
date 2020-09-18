@@ -1,4 +1,4 @@
 package codes.nttuan.dao;
 
-public interface ICommentDAO {
+public interface ICommentDAO extends GenericDAO {
 }

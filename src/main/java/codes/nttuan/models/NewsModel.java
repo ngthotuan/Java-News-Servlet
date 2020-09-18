@@ -1,11 +1,11 @@
 package codes.nttuan.models;
 
-public class NewsModel extends CommonModel {
+public class NewsModel extends AbstractModel {
     private String title;
     private String thumbnail;
     private String shortDescription;
     private String content;
-    private String categoryId;
+    private Long categoryId;
 
     public String getTitle() {
         return title;
@@ -39,11 +39,23 @@ public class NewsModel extends CommonModel {
         this.content = content;
     }
 
-    public String getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    @Override
+    public String toString() {
+        return "NewsModel{" +
+                "title='" + title + '\'' +
+                ", thumbnail='" + thumbnail + '\'' +
+                ", shortDescription='" + shortDescription + '\'' +
+                ", content='" + content + '\'' +
+                ", categoryId=" + categoryId +
+                ", createDate=" + createdDate +
+                '}';
     }
 }

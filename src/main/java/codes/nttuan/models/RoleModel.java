@@ -1,6 +1,6 @@
 package codes.nttuan.models;
 
-public class RoleModel extends CommonModel {
+public class RoleModel extends AbstractModel {
     private String name;
     private String code;
 

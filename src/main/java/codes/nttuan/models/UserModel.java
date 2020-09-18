@@ -1,6 +1,6 @@
 package codes.nttuan.models;
 
-public class UserModel extends CommonModel {
+public class UserModel extends AbstractModel {
     private String username;
     private String password;
     private String fullName;

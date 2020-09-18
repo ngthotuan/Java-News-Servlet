@@ -1,6 +1,6 @@
 package codes.nttuan.models;
 
-public class CommentModel extends CommonModel {
+public class CommentModel extends AbstractModel {
     private String content;
     private long userId;
     private long newsId;
