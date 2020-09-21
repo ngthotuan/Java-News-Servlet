@@ -26,15 +26,12 @@ public class NewsService implements INewsService {
 
     @Override
     public NewsModel findNewsById(HttpServletRequest req, HttpServletResponse res) {
-        Long id;
         String path = req.getPathInfo();
         try {
-            System.out.println(path);
-            System.out.println(path.substring(path.lastIndexOf("-")+1));
-            id = Long.parseLong(path.substring(path.lastIndexOf("-") + 1));
+            Long id = Long.parseLong(path.substring(path.lastIndexOf("-") + 1));
+            return newsDAO.findById(id);
         } catch (Exception e){
-            id = null;
+            return null;
         }
-        return newsDAO.findById(id);
     }
 }

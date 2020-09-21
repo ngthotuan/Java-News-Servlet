@@ -1,9 +1,7 @@
 package codes.nttuan.dao.impl;
 
 import codes.nttuan.dao.GenericDAO;
-import codes.nttuan.mapper.CategoryMapper;
 import codes.nttuan.mapper.IRowMapper;
-import codes.nttuan.models.CategoryModel;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -58,6 +56,85 @@ public class AbstractDAO<T> implements GenericDAO<T>{
         return res;
     }
 
+    @Override
+    public boolean update(String sql, Object... params) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        boolean isUpdated = true;
+        try {
+            connection = getConnection();
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(sql);
+            setParams(preparedStatement);
+            preparedStatement.executeUpdate();
+            connection.commit();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            isUpdated = false;
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public Long insert(String sql, Object... params) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Long id = null;
+        try {
+            connection = getConnection();
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            setParams(preparedStatement);
+            preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+            if(resultSet.next()){
+                id = resultSet.getLong(1);
+            }
+            connection.commit();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return id;
+    }
+
     private void setParams(PreparedStatement preparedStatement, Object... params) {
         for(int i = 0; i < params.length; i++){
             try {
@@ -67,6 +144,8 @@ public class AbstractDAO<T> implements GenericDAO<T>{
                     preparedStatement.setLong(i + 1, (Long) params[i]);
                 } else if (params[i] instanceof String) {
                     preparedStatement.setString(i + 1, (String) params[i]);
+                }  else if (params[i] instanceof Timestamp) {
+                    preparedStatement.setTimestamp(i + 1, (Timestamp) params[i]);
                 }
             } catch (SQLException e){
                 System.err.println("set params error");
