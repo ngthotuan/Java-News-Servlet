@@ -10,4 +10,8 @@ public interface INewsService {
     List<NewsModel> findAll();
     List<NewsModel> findNewsByCategoryCode(HttpServletRequest req, HttpServletResponse res);
     NewsModel findNewsById(HttpServletRequest req, HttpServletResponse res);
+    NewsModel save(NewsModel model);
+    NewsModel update(NewsModel model);
+    void delete(long modelId);
+    void delete(long [] modelIds);
 }

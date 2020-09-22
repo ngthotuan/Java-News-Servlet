@@ -55,7 +55,11 @@ public class NewsModel extends AbstractModel {
                 ", shortDescription='" + shortDescription + '\'' +
                 ", content='" + content + '\'' +
                 ", categoryId=" + categoryId +
-                ", createDate=" + createdDate +
+                ", id=" + id +
+                ", createdDate=" + createdDate +
+                ", modifiedDate=" + modifiedDate +
+                ", createdBy='" + createdBy + '\'' +
+                ", modifiedBy='" + modifiedBy + '\'' +
                 '}';
     }
 }

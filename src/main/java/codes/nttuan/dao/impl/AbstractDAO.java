@@ -65,7 +65,7 @@ public class AbstractDAO<T> implements GenericDAO<T>{
             connection = getConnection();
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(sql);
-            setParams(preparedStatement);
+            setParams(preparedStatement, params);
             preparedStatement.executeUpdate();
             connection.commit();
 
@@ -102,7 +102,7 @@ public class AbstractDAO<T> implements GenericDAO<T>{
             connection = getConnection();
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            setParams(preparedStatement);
+            setParams(preparedStatement, params);
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
             if(resultSet.next()){
@@ -146,6 +146,8 @@ public class AbstractDAO<T> implements GenericDAO<T>{
                     preparedStatement.setString(i + 1, (String) params[i]);
                 }  else if (params[i] instanceof Timestamp) {
                     preparedStatement.setTimestamp(i + 1, (Timestamp) params[i]);
+                }  else if (params[i] == null) {
+                    preparedStatement.setNull(i + 1, Types.NULL);
                 }
             } catch (SQLException e){
                 System.err.println("set params error");

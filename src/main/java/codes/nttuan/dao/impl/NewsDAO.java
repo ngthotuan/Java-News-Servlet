@@ -4,7 +4,6 @@ import codes.nttuan.dao.INewsDAO;
 import codes.nttuan.mapper.NewsMapper;
 import codes.nttuan.models.NewsModel;
 
-import javax.inject.Inject;
 import java.util.List;
 
 public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO {
@@ -22,8 +21,34 @@ public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO {
     }
 
     @Override
-    public NewsModel findById(Long id) {
+    public NewsModel findOne(Long id) {
         String sql = "SELECT * FROM NEWS WHERE ID = ?";
-        return query(sql, new NewsMapper(), id).get(0);
+        List<NewsModel> newsModelList = query(sql, new NewsMapper(), id);
+        return newsModelList.isEmpty() ? null : newsModelList.get(0);
+    }
+
+    @Override
+    public Long save(NewsModel model) {
+        String sql = "INSERT INTO NEWS(title, thumbnail, shortDescription, content, categoryId, " +
+                "createdDate, createdBy) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        return insert(sql, model.getTitle(), model.getThumbnail(), model.getShortDescription(),
+                model.getContent(), model.getCategoryId(), model.getCreatedDate(), model.getCreatedBy());
+    }
+
+    @Override
+    public boolean update(NewsModel model) {
+        String sql = "UPDATE NEWS SET " +
+                "title = ?, thumbnail = ?, shortDescription = ?, content = ?, categoryId = ?, " +
+                "createdDate = ?, createdBy = ?, modifiedDate = ?, modifiedBy = ? " +
+                "WHERE id = ?";
+        return update(sql, model.getTitle(), model.getThumbnail(), model.getShortDescription(),
+                model.getContent(), model.getCategoryId(), model.getCreatedDate(), model.getCreatedBy(),
+                model.getModifiedDate(), model.getModifiedBy(), model.getId());
+    }
+
+    @Override
+    public boolean delete(long modelId) {
+        String sql = "DELETE FROM NEWS WHERE id = ?";
+        return update(sql, modelId);
     }
 }

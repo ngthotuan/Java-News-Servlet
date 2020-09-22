@@ -7,5 +7,8 @@ import java.util.List;
 public interface INewsDAO {
     List<NewsModel> findAll();
     List<NewsModel> findByCategoryCode(String code);
-    NewsModel findById(Long id);
+    NewsModel findOne(Long id);
+    Long save(NewsModel model);
+    boolean update(NewsModel model);
+    boolean delete(long modelId);
 }
