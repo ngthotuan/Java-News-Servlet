@@ -21,7 +21,6 @@ public class AbstractDAO<T> implements GenericDAO<T>{
         }
     }
 
-
     @Override
     public List<T> query(String sql, IRowMapper<T> mapper, Object... params) {
         List<T> res = new ArrayList<>();

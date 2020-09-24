@@ -19,6 +19,11 @@ public class NewsService implements INewsService {
     }
 
     @Override
+    public List<NewsModel> find(int current, int limit) {
+        return newsDAO.find((current - 1)*limit, limit);
+    }
+
+    @Override
     public List<NewsModel> findNewsByCategoryCode(HttpServletRequest req, HttpServletResponse res) {
         String[] pathParts = req.getPathInfo().split("/");
         System.out.println(pathParts[1]);

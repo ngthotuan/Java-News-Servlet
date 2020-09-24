@@ -1,14 +1,20 @@
 package codes.nttuan.models;
 
 import java.sql.Timestamp;
+import java.util.List;
 
-public abstract class AbstractModel {
+public abstract class AbstractModel<T> {
     protected long id;
     protected Timestamp createdDate;
     protected Timestamp modifiedDate;
     protected String createdBy;
     protected String modifiedBy;
     protected long ids[]; // for delete list model
+    protected List<T> listResult; // for get list all model
+    //for pagination
+    protected int currentPage;
+    protected int limitItems;
+    protected int totalPages;
 
     public long getId() {
         return id;
@@ -56,5 +62,37 @@ public abstract class AbstractModel {
 
     public void setIds(long[] ids) {
         this.ids = ids;
+    }
+
+    public List<T> getListResult() {
+        return listResult;
+    }
+
+    public void setListResult(List<T> listResult) {
+        this.listResult = listResult;
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public int getLimitItems() {
+        return limitItems;
+    }
+
+    public void setLimitItems(int limitItems) {
+        this.limitItems = limitItems;
+    }
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
     }
 }

@@ -11,4 +11,5 @@ public interface INewsDAO {
     Long save(NewsModel model);
     boolean update(NewsModel model);
     boolean delete(long modelId);
+    List<NewsModel> find(int offset, int limit);
 }

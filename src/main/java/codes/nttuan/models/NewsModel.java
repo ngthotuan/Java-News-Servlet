@@ -1,6 +1,6 @@
 package codes.nttuan.models;
 
-public class NewsModel extends AbstractModel {
+public class NewsModel extends AbstractModel<NewsModel> {
     private String title;
     private String thumbnail;
     private String shortDescription;
