@@ -2,6 +2,7 @@ package codes.nttuan.service.impl;
 
 import codes.nttuan.dao.INewsDAO;
 import codes.nttuan.models.NewsModel;
+import codes.nttuan.paging.Pageable;
 import codes.nttuan.service.INewsService;
 
 import javax.inject.Inject;
@@ -19,14 +20,13 @@ public class NewsService implements INewsService {
     }
 
     @Override
-    public List<NewsModel> find(int current, int limit) {
-        return newsDAO.find((current - 1)*limit, limit);
+    public List<NewsModel> findAll(Pageable pageable) {
+        return newsDAO.findAll(pageable);
     }
 
     @Override
     public List<NewsModel> findNewsByCategoryCode(HttpServletRequest req, HttpServletResponse res) {
         String[] pathParts = req.getPathInfo().split("/");
-        System.out.println(pathParts[1]);
         return newsDAO.findByCategoryCode(pathParts[1]);
     }
 
@@ -75,5 +75,10 @@ public class NewsService implements INewsService {
         for(long id : modelIds){
             delete(id);
         }
+    }
+
+    @Override
+    public int getTotalItems() {
+        return newsDAO.getTotalItems();
     }
 }

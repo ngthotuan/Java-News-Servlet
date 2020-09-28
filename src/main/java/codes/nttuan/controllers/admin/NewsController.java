@@ -2,7 +2,11 @@ package codes.nttuan.controllers.admin;
 
 import codes.nttuan.constant.SystemConstant;
 import codes.nttuan.models.NewsModel;
+import codes.nttuan.paging.PageRequest;
+import codes.nttuan.paging.Pageable;
 import codes.nttuan.service.INewsService;
+import codes.nttuan.sorting.Sorter;
+import codes.nttuan.utils.FormUtil;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -19,13 +23,11 @@ public class NewsController extends HttpServlet {
     private INewsService newsService;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int currentPage = Integer.parseInt(req.getParameter("currentPage"));
-        int limitItems = Integer.parseInt(req.getParameter("limitItems"));
-        NewsModel model = new NewsModel();
-        model.setCurrentPage(currentPage);
-        model.setLimitItems(limitItems);
-        model.setListResult(newsService.find(currentPage, limitItems));
-        model.setTotalPages((int)Math.ceil(1.0*newsService.findAll().size() / limitItems));
+        NewsModel model = FormUtil.toModel(NewsModel.class, req);
+        Pageable pageable = new PageRequest(model.getCurrentPage(), model.getLimitItems(),
+                new Sorter(model.getSortBy(), model.getSortType()));
+        model.setListResult(newsService.findAll(pageable));
+        model.setTotalPages((int)Math.ceil(1.0*newsService.getTotalItems() / model.getLimitItems()));
         req.setAttribute(SystemConstant.MODEL, model);
         RequestDispatcher rd = req.getRequestDispatcher("/views/admin/news/listNews.jsp");
         rd.forward(req, resp);

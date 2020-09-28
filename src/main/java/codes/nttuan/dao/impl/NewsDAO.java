@@ -3,6 +3,7 @@ package codes.nttuan.dao.impl;
 import codes.nttuan.dao.INewsDAO;
 import codes.nttuan.mapper.NewsMapper;
 import codes.nttuan.models.NewsModel;
+import codes.nttuan.paging.Pageable;
 
 import java.util.List;
 
@@ -53,8 +54,21 @@ public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO {
     }
 
     @Override
-    public List<NewsModel> find(int offset, int limit) {
-        String sql = "SELECT * FROM NEWS LIMIT ?, ?";
-        return query(sql, new NewsMapper(), offset, limit);
+    public List<NewsModel> findAll(Pageable pageable) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM NEWS");
+        if(pageable.getSortable().getSortBy() != null && pageable.getSortable().getSortType() != null){
+            sql.append(String.format(" ORDER BY %s %s",
+                    pageable.getSortable().getSortBy(), pageable.getSortable().getSortType()));
+        }
+        if(pageable.getOffset() >= 0 && pageable.getLimit() != 0){
+            sql.append(String.format(" LIMIT %d OFFSET %d", pageable.getLimit(), pageable.getOffset()));
+        }
+        return query(sql.toString(), new NewsMapper());
+    }
+
+    @Override
+    public int getTotalItems() {
+        String sql = "SELECT COUNT(*) FROM NEWS";
+        return count(sql);
     }
 }

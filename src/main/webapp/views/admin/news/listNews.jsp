@@ -18,13 +18,13 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="ace-icon fa fa-home home-icon"></i>
-                    <a href="#">Home</a>
+                    <a href="<c:url value="/admin/home"/>">Home</a>
                 </li>
 
                 <li>
-                    <a href="#">Tables</a>
+                    <a href="#">QL bài viết</a>
                 </li>
-                <li class="active">Simple &amp; Dynamic</li>
+                <li class="active">Danh sách bài viết</li>
             </ul><!-- /.breadcrumb -->
 
             <div class="nav-search" id="nav-search">
@@ -63,45 +63,13 @@
                                     <td>${item.modifiedDate}</td>
                                     <td>${item.modifiedBy}</td>
                                     <td>
-                                        <div class="hidden-sm hidden-xs btn-group">
-                                            <button class="btn btn-xs btn-info">
+                                        <div class="btn-group">
+                                            <a class="btn btn-xs btn-info" href="#">
                                                 <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                            </button>
-                                            <button class="btn btn-xs btn-danger">
+                                            </a>
+                                            <a class="btn btn-xs btn-danger" href="#">
                                                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                            </button>
-                                        </div>
-                                        <div class="hidden-md hidden-lg">
-                                            <div class="inline pos-rel">
-                                                <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-                                                    <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                                    <li>
-                                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
-                                                            <span class="blue">
-                                                                <i class="ace-icon fa fa-search-plus bigger-120"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
-                                                            <span class="green">
-                                                                <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
-                                                            <span class="red">
-                                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -113,6 +81,8 @@
                         </nav>
                         <input id="currentPage" value="" type="hidden" name="currentPage">
                         <input id="limitItems" value="" type="hidden" name="limitItems">
+                        <input id="sortBy" value="" type="hidden" name="sortBy">
+                        <input id="sortType" value="" type="hidden" name="sortType">
                     </div>
                 </div><!-- /.row -->
             </form>
@@ -123,17 +93,25 @@
     document.addEventListener('DOMContentLoaded', () => {
         $(function () {
             const totalPages = ${model.totalPages};
-            const limitItems = 5;
-            const currentPage = ${model.currentPage}
+            const limitItems = 10;
+            const currentPage = ${model.currentPage};
+            const sortBy = '${model.sortBy}';
+            const sortType = '${model.sortType}';
             window.pagObj = $('#pagination').twbsPagination({
                 totalPages: totalPages,
                 visiblePages: limitItems,
                 startPage: currentPage,
+                first: 'Trang đầu',
+                prev: '<',
+                next: '>',
+                last: 'Trang cuối',
                 onPageClick: function (event, page) {
                     console.info(page + ' (from options)');
                     if(currentPage !== page){
                         $('#currentPage').val(page);
                         $('#limitItems').val(limitItems);
+                        $('#sortBy').val(sortBy);
+                        $('#sortType').val(sortType);
                         $('#pageSubmit').submit();
                     }
                 }

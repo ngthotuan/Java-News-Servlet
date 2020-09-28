@@ -23,6 +23,7 @@ public class HomeController extends HttpServlet {
     private INewsService newsService;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         List<CategoryModel> categories = categoryService.findAll();
         List<NewsModel> listNews = newsService.findAll();
 
