@@ -1,4 +1,7 @@
 package codes.nttuan.dao;
 
-public interface IUserDAO extends GenericDAO {
+import codes.nttuan.models.UserModel;
+
+public interface IUserDAO {
+    UserModel findOne(String username, String password);
 }

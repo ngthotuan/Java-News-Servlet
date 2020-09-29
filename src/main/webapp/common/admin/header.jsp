@@ -16,10 +16,10 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        Xin chào,[ten]
+                        Xin chào,${USER_MODEL.fullName}
                     </a>
                     <li class="light-blue dropdown-modal">
-                        <a href='#'>
+                        <a href='/logout'>
                             <i class="ace-icon fa fa-power-off"></i>
                             Thoát
                         </a>

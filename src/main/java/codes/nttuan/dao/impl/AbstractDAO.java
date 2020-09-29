@@ -6,21 +6,23 @@ import codes.nttuan.mapper.IRowMapper;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class AbstractDAO<T> implements GenericDAO<T>{
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
+
     public Connection getConnection(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/NEWS";
-            String username = "root";
-            String password = "123456";
+            Class.forName(resourceBundle.getString("DRIVER_NAME"));
+            String url = resourceBundle.getString("URL");
+            String username = resourceBundle.getString("USERNAME");
+            String password = resourceBundle.getString("PASSWORD");
             return DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException | SQLException e) {
             System.err.printf("Connect database error!!\nMessage %s", e.getMessage());
             return null;
         }
     }
-
     @Override
     public List<T> query(String sql, IRowMapper<T> mapper, Object... params) {
         List<T> res = new ArrayList<>();

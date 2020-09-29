@@ -4,6 +4,8 @@
     <!-- Excludes will never be decorated by Sitemesh. -->
     <excludes>
         <pattern>/api*</pattern>
+        <pattern>/notFound</pattern>
+        <pattern>/forbidden</pattern>
     </excludes>
 
 <!--    Apply Sitemesh default template-->

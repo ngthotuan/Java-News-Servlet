@@ -29,7 +29,7 @@ public class NewsController extends HttpServlet {
         model.setListResult(newsService.findAll(pageable));
         model.setTotalPages((int)Math.ceil(1.0*newsService.getTotalItems() / model.getLimitItems()));
         req.setAttribute(SystemConstant.MODEL, model);
-        RequestDispatcher rd = req.getRequestDispatcher("/views/admin/news/listNews.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("/views/admin/news/list.jsp");
         rd.forward(req, resp);
     }
 }

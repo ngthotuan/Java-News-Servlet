@@ -1,8 +1,11 @@
 package codes.nttuan.controllers.admin.api;
 
+import codes.nttuan.constant.SystemConstant;
 import codes.nttuan.models.NewsModel;
+import codes.nttuan.models.UserModel;
 import codes.nttuan.service.INewsService;
 import codes.nttuan.utils.HttpUtil;
+import codes.nttuan.utils.SessionUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.inject.Inject;
@@ -33,6 +36,7 @@ public class NewsApi extends HttpServlet {
         //get data form client
         NewsModel newsModel = HttpUtil.of(req.getReader()).toModel(NewsModel.class);
 
+        newsModel.setCreatedBy(((UserModel) SessionUtil.getSession().getValue(req, SystemConstant.USER_MODEL)).getUsername());
         //save to db
         newsModel = newsService.save(newsModel);
 
@@ -45,6 +49,7 @@ public class NewsApi extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         NewsModel newsModel = HttpUtil.of(req.getReader()).toModel(NewsModel.class);
+        newsModel.setModifiedBy(((UserModel) SessionUtil.getSession().getValue(req, SystemConstant.USER_MODEL)).getUsername());
         newsModel = newsService.update(newsModel);
         resp.setContentType("application/json");
         new ObjectMapper().writeValue(resp.getOutputStream(), newsModel);

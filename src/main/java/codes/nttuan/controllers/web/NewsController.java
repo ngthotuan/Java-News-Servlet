@@ -27,7 +27,6 @@ public class NewsController extends HttpServlet {
         List<CategoryModel> categories = categoryService.findAll();
 
         req.setAttribute("categories", categories);
-        System.out.println(newsById);
         if(newsById != null){
             req.setAttribute("news", newsById);
             req.getRequestDispatcher("/views/web/news.jsp").forward(req, resp);
