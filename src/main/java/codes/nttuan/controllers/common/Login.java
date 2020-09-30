@@ -3,14 +3,15 @@ package codes.nttuan.controllers.common;
 import codes.nttuan.constant.SystemConstant;
 import codes.nttuan.models.UserModel;
 import codes.nttuan.service.IUserService;
-import codes.nttuan.service.impl.UserService;
 import codes.nttuan.utils.FormUtil;
 import codes.nttuan.utils.SessionUtil;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/login")
@@ -39,7 +40,9 @@ public class Login extends HttpServlet {
                 if(returnUrl != null){
                     resp.sendRedirect(returnUrl);
                 }
-                else {
+                else if(user.getRole().getCode().equals(SystemConstant.ADMIN)){
+                    resp.sendRedirect("/admin/home");
+                } else{
                     resp.sendRedirect("/home");
                 }
             }

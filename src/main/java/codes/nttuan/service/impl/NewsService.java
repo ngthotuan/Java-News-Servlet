@@ -4,6 +4,7 @@ import codes.nttuan.dao.INewsDAO;
 import codes.nttuan.models.NewsModel;
 import codes.nttuan.paging.Pageable;
 import codes.nttuan.service.INewsService;
+import codes.nttuan.sorting.Sortable;
 import codes.nttuan.utils.SessionUtil;
 
 import javax.inject.Inject;
@@ -79,5 +80,10 @@ public class NewsService implements INewsService {
     @Override
     public int getTotalItems() {
         return newsDAO.getTotalItems();
+    }
+
+    @Override
+    public NewsModel findOne(Long id) {
+        return newsDAO.findOne(id);
     }
 }

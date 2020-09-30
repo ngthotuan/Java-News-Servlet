@@ -8,4 +8,5 @@ public interface Pageable {
     void setOffset(int offset);
     void setLimit(int limit);
     Sortable getSortable();
+    void setSortable(Sortable sortable);
 }

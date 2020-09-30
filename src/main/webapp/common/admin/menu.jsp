@@ -48,7 +48,7 @@
 
             <ul class="submenu">
                 <li class="">
-                    <a href="<c:url value="/admin/news/list?currentPage=1&limitItems=10&sortBy=createdDate&sortType=desc"/>">
+                    <a href="<c:url value="/admin/news/list"/>">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Danh sách bài viết
                     </a>

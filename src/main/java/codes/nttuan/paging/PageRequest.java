@@ -41,4 +41,9 @@ public class PageRequest implements Pageable {
     public Sortable getSortable() {
         return this.sortable;
     }
+
+    @Override
+    public void setSortable(Sortable sortable) {
+        this.sortable = sortable;
+    }
 }

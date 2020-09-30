@@ -48,6 +48,10 @@
 	<script src="<c:url value='/template/admin/assets/js/respond.min.js'/>"></script>
 
 	<![endif]-->
+	<!--	CKEditor-->
+	<script src="<c:url value='/ckeditor/ckeditor.js'/>"></script>
+	<script src="<c:url value='/ckfinder/ckfinder.js'/>"></script>
+
 </head>
 
 <body class="no-skin">

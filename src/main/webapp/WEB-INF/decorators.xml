@@ -6,6 +6,7 @@
         <pattern>/api*</pattern>
         <pattern>/notFound</pattern>
         <pattern>/forbidden</pattern>
+        <pattern>/ckfinder*</pattern>
     </excludes>
 
 <!--    Apply Sitemesh default template-->

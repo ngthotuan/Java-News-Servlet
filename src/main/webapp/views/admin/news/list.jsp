@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Danh sách bài viết</title>
 </head>
 <body>
 <div class="main-content">
@@ -39,7 +39,7 @@
 
         <div class="page-content" style="margin-bottom: 10px;">
             <div class="text-center">
-                <a href="#" class="btn btn-success">
+                <a href="/admin/news/edit" class="btn btn-success">
                     <i class="fa fa-plus"></i>
                     <span>Tạo bài viết mới</span>
                 </a>
@@ -50,31 +50,41 @@
                         <table id="simple-table" class="table  table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>Bài viết</th>
-                                <th>Ngày tạo</th>
-                                <th>Người tạo</th>
-                                <th>Sửa đổi lần cuối</th>
-                                <th>Người chỉnh sửa</th>
-                                <th>Hành động</th>
+                                <th class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </th>
+                                <th class="center">Bài viết</th>
+                                <th class="center">Ngày tạo</th>
+                                <th class="center">Người tạo</th>
+                                <th class="center">Sửa đổi lần cuối</th>
+                                <th class="center">Người chỉnh sửa</th>
+                                <th class="center">Sửa bài viết</th>
                             </tr>
                             </thead>
+
                             <tbody>
                             <c:forEach var="item" items="${MODEL.listResult}">
-                                <tr class="">
-                                    <td>
+                                <tr>
+                                    <td class="center">
+                                        <label class="pos-rel">
+                                            <input type="checkbox" class="ace" />
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </td>
+                                    <td class="center">
                                         <a href="<c:url value="/news/${item.title}-${item.id}"/>">${item.title}</a>
                                     </td>
-                                    <td>${item.createdDate}</td>
-                                    <td>${item.createdBy}</td>
-                                    <td>${item.modifiedDate}</td>
-                                    <td>${item.modifiedBy}</td>
-                                    <td>
+                                    <td class="center">${item.createdDate}</td>
+                                    <td class="center">${item.createdBy}</td>
+                                    <td class="center">${item.modifiedDate}</td>
+                                    <td class="center">${item.modifiedBy}</td>
+                                    <td class="center">
                                         <div class="btn-group">
-                                            <a class="btn btn-xs btn-info" href="#">
+                                            <a class="btn btn-xs btn-info" href="<c:url value='/admin/news/edit?id=${item.id}' />">
                                                 <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                            </a>
-                                            <a class="btn btn-xs btn-danger" href="#">
-                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                             </a>
                                         </div>
                                     </td>
@@ -124,6 +134,42 @@
             }).on('page', function (event, page) {
                 console.info(page + ' (from event listening)');
             });
+        });
+
+        // const btnCheckAll = $('#checkbox-all')[0];
+        //
+        // btnCheckAll.click(() => {
+        //     const checkItems = $("tbody tr td:first-child input");
+        //     if($(this).checked){
+        //         for(let i = 0; i < checkItems.length; i ++){
+        //             checkItems[i].checked = true;
+        //         }
+        //     } else{
+        //         for(let i = 0; i < checkItems.length; i ++){
+        //             checkItems[i].checked = false;
+        //         }
+        //     }
+        // });
+
+        //And for the first simple table, which doesn't have TableTools or dataTables
+        //select/deselect all rows according to table header checkbox
+        const active_class = 'active';
+        $('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
+            const th_checked = this.checked;//checkbox inside "TH" table header
+
+            $(this).closest('table').find('tbody > tr').each(function(){
+                const row = this;
+                if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+                else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+            });
+        });
+
+        //select/deselect a row when the checkbox is checked/unchecked
+        $('#simple-table').on('click', 'td input[type=checkbox]' , function(){
+            const $row = $(this).closest('tr');
+            if($row.is('.detail-row ')) return;
+            if(this.checked) $row.addClass(active_class);
+            else $row.removeClass(active_class);
         });
     });
 </script>
