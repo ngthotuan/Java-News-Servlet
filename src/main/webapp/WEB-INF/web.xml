@@ -47,6 +47,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ConnectorServlet</servlet-name>
-        <url-pattern> /ckfinder/core/connector/java/connector.java </url-pattern>
+        <url-pattern>/lib/ckfinder/core/connector/java/connector.java </url-pattern>
     </servlet-mapping>
 </web-app>

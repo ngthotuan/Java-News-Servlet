@@ -15,7 +15,7 @@
 <div class="row">
 
     <!-- Post Content Column -->
-    <div class="col-lg-8">
+    <div class="col-md-8">
 
         <!-- Title -->
         <h1 class="mt-4">${news.title}</h1>
@@ -37,6 +37,8 @@
         <div class="news-content">
             ${news.content}
         </div>
+
+        <br>
 
         <!-- Comments Form -->
         <div class="card my-4">

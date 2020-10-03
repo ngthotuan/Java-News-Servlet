@@ -49,8 +49,8 @@
 
 	<![endif]-->
 	<!--	CKEditor-->
-	<script src="<c:url value='/ckeditor/ckeditor.js'/>"></script>
-	<script src="<c:url value='/ckfinder/ckfinder.js'/>"></script>
+	<script src="<c:url value='/lib/ckeditor/ckeditor.js'/>"></script>
+	<script src="<c:url value='/lib/ckfinder/ckfinder.js'/>"></script>
 
 </head>
 

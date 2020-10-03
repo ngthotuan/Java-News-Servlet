@@ -17,8 +17,8 @@
 	Configure the location of uploaded files. See the following article for more details:
 	http://docs.cksource.com/CKFinder_2.x/Developers_Guide/Java/Configuration/baseURL_and_baseDir
 	-->
-	<baseDir></baseDir>
-	<baseURL>/uploads</baseURL>
+	<baseDir>C:/Users/nttuan/Downloads/JavaWeb/src/main/webapp/uploads/</baseDir>
+	<baseURL>../uploads</baseURL>
 	<licenseKey></licenseKey>
 	<licenseName></licenseName>
 	<!--
