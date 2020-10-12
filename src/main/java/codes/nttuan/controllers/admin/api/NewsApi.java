@@ -10,12 +10,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/api/admin/news")
@@ -36,7 +36,10 @@ public class NewsApi extends HttpServlet {
         //get data form client
         NewsModel newsModel = HttpUtil.of(req.getReader()).toModel(NewsModel.class);
 
-        newsModel.setCreatedBy(((UserModel) SessionUtil.getSession().getValue(req, SystemConstant.USER_MODEL)).getUsername());
+        newsModel.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+        try {
+            newsModel.setCreatedBy(((UserModel) SessionUtil.getSession().getValue(req, SystemConstant.USER_MODEL)).getUsername());
+        } catch (NullPointerException ignored){}
         //save to db
         newsModel = newsService.save(newsModel);
 
@@ -49,7 +52,9 @@ public class NewsApi extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         NewsModel newsModel = HttpUtil.of(req.getReader()).toModel(NewsModel.class);
-        newsModel.setModifiedBy(((UserModel) SessionUtil.getSession().getValue(req, SystemConstant.USER_MODEL)).getUsername());
+        try {
+            newsModel.setModifiedBy(((UserModel) SessionUtil.getSession().getValue(req, SystemConstant.USER_MODEL)).getUsername());
+        } catch (NullPointerException ignored){}
         newsModel = newsService.update(newsModel);
         resp.setContentType("application/json");
         new ObjectMapper().writeValue(resp.getOutputStream(), newsModel);
@@ -59,7 +64,6 @@ public class NewsApi extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         NewsModel newsModel = HttpUtil.of(req.getReader()).toModel(NewsModel.class);
-        System.out.println(newsModel);
         //update db
         newsService.delete(newsModel.getIds());
         // sent back to client

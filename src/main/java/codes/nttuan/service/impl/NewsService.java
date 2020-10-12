@@ -45,7 +45,6 @@ public class NewsService implements INewsService {
 
     @Override
     public NewsModel save(NewsModel model) {
-        model.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         Long id = newsDAO.save(model);
         return newsDAO.findOne(id);
     }

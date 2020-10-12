@@ -89,7 +89,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         //CKEditor
         const editor = CKEDITOR.replace('content');
-        CKFinder.setupCKEditor(editor, '<%=request.getContextPath()%>/ckfinder/')
+        CKFinder.setupCKEditor(editor, '<%=request.getContextPath()%>/lib/ckfinder/')
         function updateNews(data) {
             $.ajax({
                 url: '${newsApi}',

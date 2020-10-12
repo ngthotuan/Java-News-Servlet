@@ -19,7 +19,12 @@
             <c:forEach var="item" items="${listNews}">
                 <div class="col-lg-4 portfolio-item">
                     <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <c:if test="${not empty item.thumbnail}">
+                            <a href="/news/${item.title}-${item.id}"><img class="card-img-top" src="${item.thumbnail}" alt=""></a>
+                        </c:if>
+                        <c:if test="${empty item.thumbnail}">
+                            <a href="/news/${item.title}-${item.id}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        </c:if>
                         <div class="card-body">
                             <h4 class="card-title">
                                 <a href="/news/${item.title}-${item.id}">${item.title}</a>

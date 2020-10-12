@@ -36,7 +36,6 @@ public class NewsControllerList extends HttpServlet {
                 new Sorter(model.getSortBy(), model.getSortType()));
         model.setListResult(newsService.findAll(pageable));
         model.setTotalPages((int)Math.ceil(1.0*newsService.getTotalItems() / model.getLimitItems()));
-        System.out.println(model.getListResult().size());
         req.setAttribute(SystemConstant.MODEL, model);
         RequestDispatcher rd = req.getRequestDispatcher("/views/admin/news/list.jsp");
         rd.forward(req, resp);

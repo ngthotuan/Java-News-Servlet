@@ -40,6 +40,10 @@
             <param-value>/WEB-INF/config.xml</param-value>
         </init-param>
         <init-param>
+            <param-name>configuration</param-name>
+            <param-value>codes.nttuan.config.CKFinderConfiguration</param-value>
+        </init-param>
+        <init-param>
             <param-name>debug</param-name>
             <param-value>false</param-value>
         </init-param>

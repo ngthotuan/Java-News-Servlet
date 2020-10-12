@@ -4,7 +4,7 @@ USE NEWS;
 
 CREATE TABLE ROLE(
                      ID BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                     NAME VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL ,
+                     NAME VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
                      CODE VARCHAR(255) NOT NULL,
                      CREATEDDATE TIMESTAMP NULL,
                      MODIFIEDDATE TIMESTAMP NULL,
@@ -16,7 +16,7 @@ CREATE TABLE USER (
                       ID BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                       USERNAME VARCHAR(150) NOT NULL,
                       PASSWORD VARCHAR(150) NOT NULL,
-                      FULLNAME VARCHAR(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+                      FULLNAME VARCHAR(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
                       STATUS INT NOT NULL,
                       ROLEID BIGINT NOT NULL,
                       CREATEDDATE TIMESTAMP NULL,
@@ -31,10 +31,10 @@ ALTER TABLE USER ADD CONSTRAINT FK_USER_ROLE
 
 CREATE TABLE NEWS (
                       ID BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                      TITLE VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+                      TITLE VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
                       THUMBNAIL VARCHAR(255) NULL,
-                      SHORTDESCRIPTION TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-                      CONTENT TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL ,
+                      SHORTDESCRIPTION TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+                      CONTENT TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL ,
                       CATEGORYID BIGINT NOT NULL,
                       CREATEDDATE TIMESTAMP NULL,
                       MODIFIEDDATE TIMESTAMP NULL,
@@ -45,7 +45,7 @@ CREATE TABLE NEWS (
 
 CREATE TABLE CATEGORY (
                           ID BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                          NAME VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+                          NAME VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                           CODE VARCHAR(255) NOT NULL,
                           CREATEDDATE TIMESTAMP NULL,
                           MODIFIEDDATE TIMESTAMP NULL,
@@ -60,7 +60,7 @@ ALTER TABLE NEWS ADD CONSTRAINT FK_NEWS_CATEGORY
 
 CREATE TABLE COMMENT (
                          ID BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                         CONTENT TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+                         CONTENT TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
                          USERID BIGINT NOT NULL,
                          NEWSID BIGINT NOT NULL,
                          CREATEDDATE TIMESTAMP NULL,
