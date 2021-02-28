@@ -17,4 +17,5 @@ public interface INewsService {
     void delete(long modelId);
     void delete(long [] modelIds);
     int getTotalItems();
+    NewsModel findOne(Long id);
 }

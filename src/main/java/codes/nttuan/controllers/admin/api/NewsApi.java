@@ -36,7 +36,9 @@ public class NewsApi extends HttpServlet {
         //get data form client
         NewsModel newsModel = HttpUtil.of(req.getReader()).toModel(NewsModel.class);
 
-        newsModel.setCreatedBy(((UserModel) SessionUtil.getSession().getValue(req, SystemConstant.USER_MODEL)).getUsername());
+        UserModel currentUser = (UserModel) SessionUtil.getSession().getValue(req, SystemConstant.USER_MODEL);
+        if( currentUser != null)
+            newsModel.setCreatedBy(currentUser.getUsername());
         //save to db
         newsModel = newsService.save(newsModel);
 
@@ -49,7 +51,11 @@ public class NewsApi extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         NewsModel newsModel = HttpUtil.of(req.getReader()).toModel(NewsModel.class);
-        newsModel.setModifiedBy(((UserModel) SessionUtil.getSession().getValue(req, SystemConstant.USER_MODEL)).getUsername());
+
+        UserModel currentUser = (UserModel) SessionUtil.getSession().getValue(req, SystemConstant.USER_MODEL);
+        if( currentUser != null)
+            newsModel.setModifiedBy(currentUser.getUsername());
+
         newsModel = newsService.update(newsModel);
         resp.setContentType("application/json");
         new ObjectMapper().writeValue(resp.getOutputStream(), newsModel);
