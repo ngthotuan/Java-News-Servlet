@@ -13,50 +13,55 @@
 </head>
 <body>
     <!-- Page Content -->
-    <div class="container">
-        <h1 class="mt-4 mb-3">Danh sách bài viết</h1>
-        <div class="row">
-            <c:forEach var="item" items="${listNews}">
-                <div class="col-lg-4 portfolio-item">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="/news/${item.title}-${item.id}">${item.title}</a>
-                            </h4>
-                            <p class="card-text">${item.shortDescription}</p>
+    <div class="container" style="min-height: 500px">
+        <c:choose>
+            <c:when test="${empty listNews}">
+                <h1 class="mt-4 mb-3">Không tìm thấy bài viết nào</h1>
+            </c:when>
+            <c:otherwise>'
+                <h1 class="mt-4 mb-3">Danh sách bài viết</h1>
+                <div class="row">
+                    <c:forEach var="item" items="${listNews}">
+                        <div class="col-lg-4 portfolio-item">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="/news/${item.title}-${item.id}">${item.title}</a>
+                                    </h4>
+                                    <p class="card-text">${item.shortDescription}</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </c:forEach>
                 </div>
-            </c:forEach>
-        </div>
-        <!-- /.row -->
-
-        <!-- Pagination -->
-<%--        <ul class="pagination justify-content-center">--%>
-<%--            <li class="page-item">--%>
-<%--                <a class="page-link" href="#" aria-label="Previous">--%>
-<%--                    <span aria-hidden="true">&laquo;</span>--%>
-<%--                    <span class="sr-only">Previous</span>--%>
-<%--                </a>--%>
-<%--            </li>--%>
-<%--            <li class="page-item">--%>
-<%--                <a class="page-link" href="#">1</a>--%>
-<%--            </li>--%>
-<%--            <li class="page-item">--%>
-<%--                <a class="page-link" href="#">2</a>--%>
-<%--            </li>--%>
-<%--            <li class="page-item">--%>
-<%--                <a class="page-link" href="#">3</a>--%>
-<%--            </li>--%>
-<%--            <li class="page-item">--%>
-<%--                <a class="page-link" href="#" aria-label="Next">--%>
-<%--                    <span aria-hidden="true">&raquo;</span>--%>
-<%--                    <span class="sr-only">Next</span>--%>
-<%--                </a>--%>
-<%--            </li>--%>
-<%--        </ul>--%>
-
+                <!-- Pagination -->
+                <%--        <ul class="pagination justify-content-center">--%>
+                <%--            <li class="page-item">--%>
+                <%--                <a class="page-link" href="#" aria-label="Previous">--%>
+                <%--                    <span aria-hidden="true">&laquo;</span>--%>
+                <%--                    <span class="sr-only">Previous</span>--%>
+                <%--                </a>--%>
+                <%--            </li>--%>
+                <%--            <li class="page-item">--%>
+                <%--                <a class="page-link" href="#">1</a>--%>
+                <%--            </li>--%>
+                <%--            <li class="page-item">--%>
+                <%--                <a class="page-link" href="#">2</a>--%>
+                <%--            </li>--%>
+                <%--            <li class="page-item">--%>
+                <%--                <a class="page-link" href="#">3</a>--%>
+                <%--            </li>--%>
+                <%--            <li class="page-item">--%>
+                <%--                <a class="page-link" href="#" aria-label="Next">--%>
+                <%--                    <span aria-hidden="true">&raquo;</span>--%>
+                <%--                    <span class="sr-only">Next</span>--%>
+                <%--                </a>--%>
+                <%--            </li>--%>
+                <%--        </ul>--%>
+                <!-- /.row -->
+            </c:otherwise>
+        </c:choose>
     </div>
     <!-- /.container -->
 </body>

@@ -35,10 +35,11 @@ public class NewsApi extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         //get data form client
         NewsModel newsModel = HttpUtil.of(req.getReader()).toModel(NewsModel.class);
-
         UserModel currentUser = (UserModel) SessionUtil.getSession().getValue(req, SystemConstant.USER_MODEL);
-        if( currentUser != null)
+        if( currentUser != null) {
             newsModel.setCreatedBy(currentUser.getUsername());
+            newsModel.setModifiedBy(currentUser.getUsername());
+        }
         //save to db
         newsModel = newsService.save(newsModel);
 
@@ -53,8 +54,9 @@ public class NewsApi extends HttpServlet {
         NewsModel newsModel = HttpUtil.of(req.getReader()).toModel(NewsModel.class);
 
         UserModel currentUser = (UserModel) SessionUtil.getSession().getValue(req, SystemConstant.USER_MODEL);
-        if( currentUser != null)
+        if( currentUser != null) {
             newsModel.setModifiedBy(currentUser.getUsername());
+        }
 
         newsModel = newsService.update(newsModel);
         resp.setContentType("application/json");
