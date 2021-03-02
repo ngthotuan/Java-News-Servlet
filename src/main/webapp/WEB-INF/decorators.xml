@@ -6,7 +6,6 @@
         <pattern>/api*</pattern>
         <pattern>/notFound</pattern>
         <pattern>/forbidden</pattern>
-        <pattern>/lib*</pattern>
     </excludes>
 
 <!--    Apply Sitemesh default template-->

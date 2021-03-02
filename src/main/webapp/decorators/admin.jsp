@@ -48,10 +48,6 @@
 	<script src="<c:url value='/template/admin/assets/js/respond.min.js'/>"></script>
 
 	<![endif]-->
-	<!--	CKEditor-->
-	<script src="<c:url value='/lib/ckeditor/ckeditor.js'/>"></script>
-	<script src="<c:url value='/lib/ckfinder/ckfinder.js'/>"></script>
-
 </head>
 
 <body class="no-skin">
@@ -115,8 +111,10 @@
 	<script src="<c:url value='/template/admin/assets/js/ace.min.js' />"></script>
 
 <%--	my script--%>
-	<script src="<c:url  value='/template/paging/jquery.twbsPagination.js'/>" type="text/javascript"></script>
-
+	<script src="<c:url value='/template/paging/jquery.twbsPagination.js' />"></script>
+<%--tiny mce--%>
+	<script src="<c:url value='/lib/tinymce/tinymce.min.js' />"></script>
+	<script src="<c:url value='/lib/tinymce/custom/init.js' />"></script>
 	<!-- inline scripts related to this page -->
 	<!-- Có thể thiếu js, tủy trang add vào đây !!! -->
 

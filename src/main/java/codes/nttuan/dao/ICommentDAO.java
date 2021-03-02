@@ -1,4 +1,6 @@
 package codes.nttuan.dao;
 
-public interface ICommentDAO  {
+import codes.nttuan.models.CommentModel;
+
+public interface ICommentDAO extends GenericDAO<CommentModel>  {
 }

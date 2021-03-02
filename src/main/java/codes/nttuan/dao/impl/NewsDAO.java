@@ -31,9 +31,10 @@ public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO {
     @Override
     public Long save(NewsModel model) {
         String sql = "INSERT INTO NEWS(title, thumbnail, shortDescription, content, categoryId, " +
-                "createdDate, createdBy) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                "createdDate, createdBy, modifiedDate, modifiedBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return insert(sql, model.getTitle(), model.getThumbnail(), model.getShortDescription(),
-                model.getContent(), model.getCategoryId(), model.getCreatedDate(), model.getCreatedBy());
+                model.getContent(), model.getCategoryId(), model.getCreatedDate(), model.getCreatedBy(),
+                model.getModifiedDate(), model.getModifiedBy());
     }
 
     @Override

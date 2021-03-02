@@ -69,7 +69,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
                                 <button type="button" id="confirmDelete" class="btn btn-danger">
-                                        <i class="fa fa-trash-o"></i>
+                                    <i class="fa fa-trash-o"></i>
                                     Xác nhận
                                 </button>
                             </div>

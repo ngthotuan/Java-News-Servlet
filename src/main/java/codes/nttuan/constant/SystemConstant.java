@@ -9,7 +9,4 @@ public class SystemConstant {
     public static final String ERROR_MESSAGE = "ERROR_MESSAGE";
     public static final String USER = "user";
     public static final String ADMIN = "admin";
-
-    public static final String BASE_URL = "/uploads";
-    public static final String BASE_DIR = null;
 }

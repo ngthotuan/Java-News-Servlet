@@ -9,7 +9,7 @@ public abstract class AbstractModel<T> {
     protected Timestamp modifiedDate;
     protected String createdBy;
     protected String modifiedBy;
-    protected long ids[]; // for delete list model
+    protected long[] ids; // for delete list model
     protected List<T> listResult; // for get list all model
     //for pagination
     protected int currentPage;

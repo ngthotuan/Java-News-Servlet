@@ -65,7 +65,6 @@
                         </div>
                         <div class="form-group">
                             <label for="content">Nội dung bài viết</label>
-<%--                            <input type="text" class="form-control" id="content" name="content" value="${NEWS_MODEL.content}">--%>
                             <textarea type="text" class="form-control" id="content" name="content">${NEWS_MODEL.content}</textarea>
                         </div>
                         <div class="text-center">
@@ -87,9 +86,6 @@
 </div><!-- /.main-content -->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        //CKEditor
-        const editor = CKEDITOR.replace('content');
-        CKFinder.setupCKEditor(editor, '<%=request.getContextPath()%>/lib/ckfinder/')
         function updateNews(data) {
             $.ajax({
                 url: '${newsApi}',
@@ -129,8 +125,8 @@
             $.map(formData, function(n, i){
                 data[n['name']] = n['value'];
             });
-            //get data ckeditor
-            data["content"] = editor.getData();
+            //get data tinymce
+            data['content'] = tinymce.get('content').getContent();
             const id = $('#id').val();
 
             if(id === ""){

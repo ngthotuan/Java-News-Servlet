@@ -6,7 +6,7 @@ import codes.nttuan.paging.Pageable;
 
 import java.util.List;
 
-public interface INewsDAO {
+public interface INewsDAO extends GenericDAO<NewsModel> {
     List<NewsModel> findAll();
     List<NewsModel> findByCategoryCode(String code);
     NewsModel findOne(Long id);

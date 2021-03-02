@@ -4,8 +4,6 @@ import codes.nttuan.dao.INewsDAO;
 import codes.nttuan.models.NewsModel;
 import codes.nttuan.paging.Pageable;
 import codes.nttuan.service.INewsService;
-import codes.nttuan.sorting.Sortable;
-import codes.nttuan.utils.SessionUtil;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +43,8 @@ public class NewsService implements INewsService {
 
     @Override
     public NewsModel save(NewsModel model) {
+        model.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+        model.setModifiedDate(new Timestamp(System.currentTimeMillis()));
         Long id = newsDAO.save(model);
         return newsDAO.findOne(id);
     }
