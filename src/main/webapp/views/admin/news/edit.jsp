@@ -125,6 +125,8 @@
             $.map(formData, function(n, i){
                 data[n['name']] = n['value'];
             });
+            //get data tinymce
+            data['content'] = tinymce.get('content').getContent();
             const id = $('#id').val();
 
             if(id === ""){
